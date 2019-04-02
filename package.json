@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://github.com/hereserin/hereserin.github.io/ThousandApp",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --mode=development",
     "postinstall": "webpack --mode=production",
-    "build": "webpack thousand.jsx -o bundle.js"
+    "build": "webpack thousand.jsx -o bundle.js",
+    "deploy": "master -d build"
   },
   "engines": {
     "node": "10.6.0",
