@@ -48244,7 +48244,8 @@ __webpack_require__.r(__webpack_exports__);
 var fetchPages = function fetchPages() {
   return $.ajax({
     method: "GET",
-    url: "localhost:3000/api/pages"
+    url: "localhost:3000/api/pages",
+    dataType: "jsonp"
   });
 }; // export const fetchPages = () => {
 //   return $.ajax({
