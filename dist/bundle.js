@@ -48245,7 +48245,7 @@ var fetchPages = function fetchPages() {
   return $.ajax({
     method: "GET",
     url: "localhost:3000/api/pages",
-    dataType: "jsonp"
+    dataType: "cors"
   });
 }; // export const fetchPages = () => {
 //   return $.ajax({
