@@ -1,7 +1,8 @@
 module.exports = {
   entry: "./thousand.jsx",
   output: {
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/ThousandApp/"
   },
   module: {
     rules: [
