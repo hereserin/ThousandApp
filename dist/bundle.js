@@ -48244,13 +48244,13 @@ __webpack_require__.r(__webpack_exports__);
 var fetchPages = function fetchPages() {
   return $.ajax({
     method: "GET",
-    url: "localhost:3000/api/pages",
-    dataType: "cors"
+    url: "localhost:3000/api/pages"
   });
 }; // export const fetchPages = () => {
 //   return $.ajax({
 //     method: "GET",
 //     url: `/api/pages`
+// dataType: "json"
 //   });
 // };
 //
