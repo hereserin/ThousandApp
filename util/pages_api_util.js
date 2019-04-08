@@ -6,6 +6,14 @@ export const fetchPages = () => {
   });
 };
 
+export const searchPages = search => {
+  return $.ajax({
+    method: "GET",
+    url: `https://thousand-app.herokuapp.com/api/search`,
+    data: search
+  });
+};
+
 // export const fetchPages = () => {
 //   return $.ajax({
 //     method: "GET",

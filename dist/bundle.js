@@ -90,20 +90,40 @@
 /*!*********************************!*\
   !*** ./actions/page_actions.js ***!
   \*********************************/
-/*! exports provided: RECEIVE_PAGES, fetchPages */
+/*! exports provided: RECEIVE_PAGES, RECEIVE_PAGE, START_LOADING_PAGES, START_LOADING_PAGE, CLEAR_PAGES, fetchPages, searchPages, startLoadingPages, startLoadingPage, clearPages */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PAGES", function() { return RECEIVE_PAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PAGE", function() { return RECEIVE_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "START_LOADING_PAGES", function() { return START_LOADING_PAGES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "START_LOADING_PAGE", function() { return START_LOADING_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_PAGES", function() { return CLEAR_PAGES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPages", function() { return fetchPages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchPages", function() { return searchPages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startLoadingPages", function() { return startLoadingPages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startLoadingPage", function() { return startLoadingPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearPages", function() { return clearPages; });
 /* harmony import */ var _util_pages_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/pages_api_util */ "./util/pages_api_util.js");
 
 var RECEIVE_PAGES = "RECEIVE_PAGES";
+var RECEIVE_PAGE = "RECEIVE_PAGE";
+var START_LOADING_PAGES = "START_LOADING_PAGES";
+var START_LOADING_PAGE = "START_LOADING_PAGE";
+var CLEAR_PAGES = "CLEAR_PAGES";
 var fetchPages = function fetchPages() {
   return function (dispatch) {
     return _util_pages_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchPages"]().then(function (pages) {
       return dispatch(receivePages(pages));
+    });
+  };
+};
+var searchPages = function searchPages(search) {
+  return function (dispatch) {
+    dispatch(startLoadingPages());
+    return _util_pages_api_util__WEBPACK_IMPORTED_MODULE_0__["searchPages"](search).then(function (payload) {
+      return dispatch(receivePages(payload));
     });
   };
 }; // export const fetchPages = () => {
@@ -117,6 +137,22 @@ var receivePages = function receivePages(_ref) {
   return {
     type: RECEIVE_PAGES,
     pages: pages
+  };
+};
+
+var startLoadingPages = function startLoadingPages() {
+  return {
+    type: START_LOADING_PAGES
+  };
+};
+var startLoadingPage = function startLoadingPage() {
+  return {
+    type: START_LOADING_PAGE
+  };
+};
+var clearPages = function clearPages() {
+  return {
+    type: CLEAR_PAGES
   };
 };
 
@@ -329,19 +365,115 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_page_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/page_actions */ "./actions/page_actions.js");
+/* harmony import */ var _util_search_query_parsers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../util/search_query_parsers */ "./util/search_query_parsers.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var SearchBar = function SearchBar() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-search-bar-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "main-search-bar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Thousand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "search-button-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search"))));
+
+
+
+
+
+var SearchBar =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar() {
+    var _this;
+
+    _classCallCheck(this, SearchBar);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchBar).call(this));
+    _this.handleSearchInput = _this.handleSearchInput.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.parseUserInputToUrl = _this.parseUserInputToUrl.bind(_assertThisInitialized(_this));
+    _this.state = {
+      searchInput: ""
+    };
+    return _this;
+  }
+
+  _createClass(SearchBar, [{
+    key: "handleSearchInput",
+    value: function handleSearchInput(e) {
+      return this.setState({
+        searchInput: e.currentTarget.value
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      var userQuery = this.parseUserInputToUrl();
+      this.props.clearPages();
+      this.props.searchPages({
+        query: userQuery
+      });
+      this.props.history.push("/pages/search/=".concat(userQuery));
+    }
+  }, {
+    key: "parseUserInputToUrl",
+    value: function parseUserInputToUrl() {
+      var userQueryInput = this.state.searchInput;
+      return _util_search_query_parsers__WEBPACK_IMPORTED_MODULE_4__["parseUserInputToUrl"](userQueryInput);
+    }
+  }, {
+    key: "handleSearchInputKeyPress",
+    value: function handleSearchInputKeyPress(event) {
+      if (event.key === "Enter") {
+        this.handleSubmit();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-search-bar-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "main-search-bar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Thousand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "search-button-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search"))));
+    }
+  }]);
+
+  return SearchBar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchPages: function fetchPages() {
+      return dispatch(Object(_actions_page_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPages"])());
+    },
+    searchPages: function searchPages(query) {
+      return dispatch(Object(_actions_page_actions__WEBPACK_IMPORTED_MODULE_3__["searchPages"])(query));
+    },
+    clearPages: function clearPages() {
+      return dispatch(Object(_actions_page_actions__WEBPACK_IMPORTED_MODULE_3__["clearPages"])());
+    }
+  };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (SearchBar);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(null, mapDispatchToProps)(SearchBar)));
 
 /***/ }),
 
@@ -48835,12 +48967,13 @@ document.addEventListener("DOMContentLoaded", function () {
 /*!********************************!*\
   !*** ./util/pages_api_util.js ***!
   \********************************/
-/*! exports provided: fetchPages */
+/*! exports provided: fetchPages, searchPages */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPages", function() { return fetchPages; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchPages", function() { return searchPages; });
 var fetchPages = function fetchPages() {
   return $.ajax({
     method: "GET",
@@ -48848,6 +48981,13 @@ var fetchPages = function fetchPages() {
     header: {
       "Content-Type": "application/json"
     }
+  });
+};
+var searchPages = function searchPages(search) {
+  return $.ajax({
+    method: "GET",
+    url: "https://thousand-app.herokuapp.com/api/search",
+    data: search
   });
 }; // export const fetchPages = () => {
 //   return $.ajax({
@@ -48857,6 +48997,26 @@ var fetchPages = function fetchPages() {
 //   });
 // };
 //
+
+/***/ }),
+
+/***/ "./util/search_query_parsers.jsx":
+/*!***************************************!*\
+  !*** ./util/search_query_parsers.jsx ***!
+  \***************************************/
+/*! exports provided: parseUrlToUserInput, parseUserInputToUrl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseUrlToUserInput", function() { return parseUrlToUserInput; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseUserInputToUrl", function() { return parseUserInputToUrl; });
+var parseUrlToUserInput = function parseUrlToUserInput(urlQuery) {
+  return urlQuery.substring(1).replace(/[^A-Za-z0-9]/g, " ");
+};
+var parseUserInputToUrl = function parseUserInputToUrl(userSearchTextInput) {
+  return userSearchTextInput.replace(/[^A-Za-z0-9]/g, "+");
+};
 
 /***/ })
 
