@@ -446,11 +446,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-search-bar-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "main-search-bar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Thousand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Thousand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "th-search-bar-input",
+        onKeyPress: function onKeyPress(e) {
+          return _this2.handleSearchInputKeyPress(e);
+        },
+        placeholder: "Search the index...",
+        onChange: this.handleSearchInput
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search-button-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleSubmit
