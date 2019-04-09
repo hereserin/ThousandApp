@@ -46,7 +46,7 @@ class SearchBar extends React.Component {
           <h1> Thousand</h1>
           <input />
           <div className="search-button-container">
-            <button>Search</button>
+            <button onClick={this.handleSubmit}>Search</button>
           </div>
         </section>
       </div>

@@ -452,7 +452,9 @@ function (_React$Component) {
         className: "main-search-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Thousand"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "search-button-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleSubmit
+      }, "Search"))));
     }
   }]);
 
