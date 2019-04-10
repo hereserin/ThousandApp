@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { fetchPages } from "../actions/page_actions";
 import PageIndexItem from "./page_index_item";
+import * as QueryParsers from "./../util/search_query_parsers";
 
 class PageIndex extends React.Component {
   constructor(props) {
@@ -10,7 +11,12 @@ class PageIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchPages();
+    if (this.props.query === undefined) {
+      this.props.fetchPages();
+    } else {
+      const userQuery = this.parseUrlToUserInput();
+      this.props.searchPages({ query: userQuery });
+    }
   }
 
   composePageList() {
@@ -25,6 +31,11 @@ class PageIndex extends React.Component {
     });
 
     return pageList;
+  }
+
+  parseUrlToUserInput() {
+    const urlQuery = this.props.match.params.query;
+    return QueryParsers.parseUrlToUserInput(urlQuery);
   }
 
   render() {
@@ -42,7 +53,8 @@ class PageIndex extends React.Component {
 
 const mapStateToProps = ({ entities }, ownProps) => {
   return {
-    pages: entities.pages
+    pages: entities.pages,
+    query: ownProps.match.params.query
   };
 };
 
@@ -50,6 +62,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchPages: () => {
       return dispatch(fetchPages());
+    },
+    searchPages: query => {
+      return dispatch(searchPages(query));
     }
   };
 };
