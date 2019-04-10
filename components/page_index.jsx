@@ -26,7 +26,12 @@ class PageIndex extends React.Component {
       let page = pages[page_id];
       // pageList.push(<li key={page_id}>{page.title}</li>);
       pageList.push(
-        <PageIndexItem key={page_id} title={page.title} url={page.url} />
+        <PageIndexItem
+          key={page_id}
+          title={page.title}
+          url={page.url}
+          excerpt={page.excerpt}
+        />
       );
     });
 
