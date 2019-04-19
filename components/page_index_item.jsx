@@ -4,7 +4,7 @@ const PageIndexItem = props => {
   return (
     <div className="page-index-item">
       <a href={props.url}>
-        <p className="page-clickable-title">{props.title}</p>
+        <p className="page-clickable-title">pageRank: {props.title}</p>
       </a>
       <p className="page-rank">{props.pageRank}</p>
       <p className="page-url">{props.url}</p>

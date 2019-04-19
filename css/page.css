@@ -17,3 +17,9 @@
 .page-url {
   color: green;
 }
+
+.page-rank {
+  color: #dad3d3fa;
+  font-weight: bold;
+  font-style: italic;
+}
