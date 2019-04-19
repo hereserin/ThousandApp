@@ -29,6 +29,7 @@ class PageIndex extends React.Component {
         <PageIndexItem
           key={page_id}
           title={page.title}
+          pageRank={page.page_rank}
           url={page.url}
           excerpt={page.excerpt}
         />
